@@ -5,7 +5,7 @@ $('.navbar a[data-ex]').on('click', function(event) {
 	document.querySelector('.navbar li.active').classList.remove('active');
 	//Set the new active class.
 	event.target.parentNode.classList.add('active');
-   //Hide all the element //Todo: simplify.
+	//Hide all the element //Todo: simplify.
 	Array.prototype.forEach.call(document.querySelectorAll("div[data-ex]"), function(elt) {
 		elt.hidden = true;
 	});
@@ -13,3 +13,15 @@ $('.navbar a[data-ex]').on('click', function(event) {
 	var selector = "div[data-ex='" + event.target.getAttribute('data-ex') + "']";
 	document.querySelector(selector).hidden = false;
 });
+//Global name space.
+Demo = {};
+
+(function(NS) {
+	var ajax = function(e) {
+		console.log(e);
+	};
+	NS.ajax = ajax;
+	return ajax;
+})(Demo);
+
+Demo.ajax('Papa', 'Singe');
