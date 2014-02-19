@@ -9,4 +9,5 @@ by [Pierre Besson](mailto:pierre.besson7@gmail.com)
 - Geolocalization
 - File Api
 - Offline
-- Pattern
+- Classic Patterns
+- Promise
