@@ -1,4 +1,4 @@
-# Ajax
+# XMLHttpRequest
 --
 ## GET
 
