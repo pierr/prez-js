@@ -43,7 +43,7 @@
             <li><a data-ex="ajax">Ajax</a></li>
             <li><a data-ex="websocket">WebSockets</a></li>
             <li><a data-ex="webworkers">WebWorkers</a></li>
-            <li><a data-ex="geolocalization">Geolocalization</a></li>
+            <li><a data-ex="geolocation">Geolocalization</a></li>
             <li><a data-ex="fileapi">File Api</a></li>
             <li><a data-ex="offline">Offline</a></li>
             <li><a data-ex="promise">Promise</a></li>
@@ -59,27 +59,37 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" data-ex="home" hidden>
         <h1>Home</h1>
-        <div class="container"></div>
+        <div class="container">
+            This page contains all the examples for the presentation.
+        </div>
     </div>
     <div class="jumbotron" data-ex="ajax" hidden>
         <h1>Ajax</h1>
-        <button class="btn btn-primary btn-lg" id="ajax"> Try</button>
+        <button class="btn btn-primary btn-lg" id="ajax"><span class="glyphicon glyphicon-refresh"> Try</button>
         <div class="container"></div>
     </div>
     <div class="jumbotron" data-ex="websocket" hidden>
         <h1>Web Socket</h1>
-        <button class="btn btn-success" id="ws-connect"> Connect</button>
-        <button class="btn btn-primary" id="ws-click"> Emit</button>
+        <button class="btn btn-success" id="ws-connect"><span class="glyphicon glyphicon-off"> Connect</button>
+        <button class="btn btn-primary" id="ws-click"><span class="glyphicon glyphicon-flash"> Emit</button>
         <div class="container"></div>
     </div>
 
-    <div class="" data-ex="webworkers" hidden>
+    <div class="jumbotron" data-ex="webworkers" hidden>
         <h1>WebWorkers</h1>
-       <button class="btn btn-success" id="ww-start"> Start</button>
-       <button class="btn btn-warning" id="ww-stop"> Stop</button>
-       <button class="btn btn-danger" id="ww-stop-force"> Stop --force</button>
-       <button class="btn btn-primary" id="ww-nimp"> Nimp</button>
-       <button class="btn btn-info" id="ww-unknown"> Unknown</button>
+       <button class="btn btn-success" id="ww-start"><span class="glyphicon glyphicon-chevron-right"></span> Start</button>
+       <button class="btn btn-warning" id="ww-stop"><span class="glyphicon glyphicon-stop"> Stop</button>
+       <button class="btn btn-danger" id="ww-stop-force"><span class="glyphicon glyphicon-eject"> Stop --force</button>
+       <button class="btn btn-primary" id="ww-nimp"><span class="glyphicon glyphicon-random"></span> Nimp</button>
+       <button class="btn btn-info" id="ww-unknown"><span class="glyphicon glyphicon-eye-close"></span> Unknown</button>
+      <div class="container"></div>
+    </div>
+     
+
+     <div class="jumbotron" data-ex="geolocation" hidden>
+        <h1>WebWorkers</h1>
+       <button class="btn btn-success" id="locate"><span class="glyphicon glyphicon-map-marker"></span>Locate me</button>
+       <button class="btn btn-danger" id="track"><span class="glyphicon glyphicon-globe"></span> Track me</button>
       <div class="container"></div>
     </div>
 
