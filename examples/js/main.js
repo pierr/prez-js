@@ -87,3 +87,43 @@ Demo = {};
 $('button#ajax').on('click', function(event) {
 	Demo.ajax('GET', 'http://updates.html5rocks.com');
 });
+
+
+// ## WebSocket
+(function(NS) {
+	var ws = {};
+	ws.connect = function(url) {
+		//Connect to the web socket
+		NS.socket = io.connect(url);
+		//When the connection is up, the new event is emit from the server.
+		NS.socket.on('news', function(data) {
+			console.log(data);
+			//Emit a message to the server.
+			NS.socket.emit('demo-client', {
+				my: 'ws-connect'
+			});
+			//Display the connection status.
+			$('div[data-ex="websocket"] .container').html('Connected');
+		});
+
+	};
+	ws.emit = function(data) {
+		//On each click emit a message to the server which is acknowleging the result.
+		NS.socket.emit('demo-client', data, function cb(date){
+			//Display the response.
+			$('div[data-ex="websocket"] .container').append('<br />The server respond at: <b>'+ date+"</b>");
+		});
+		//Display the emit.
+		$('div[data-ex="websocket"] .container').append('<hr />Event emit: <b>' + new Date().toJSON() +"</b>");
+	};
+	NS.ws = ws;
+	return ws;
+})(Demo);
+$('button#ws-connect').on('click', function(event) {
+	Demo.ws.connect('http://localhost:8888');
+});
+$('button#ws-click').on('click', function(event) {
+	Demo.ws.emit({
+		papa: "singe"
+	});
+});

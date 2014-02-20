@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="http://localhost:8888/socket.io/socket.io.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -60,15 +61,14 @@
         <button class="btn btn-default" id="ajax"> Try</button>
         <div class="container"></div>
     </div>
-
     <div class="jumbotron" data-ex="websocket" hidden>
-      <div class="container">
-        <h1>WebSocket</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-      </div>
+        <h1>Web Socket</h1>
+        <button class="btn btn-success" id="ws-connect"> Connect</button>
+            <button class="btn btn-primary" id="ws-click"> Emit</button>
+        <div class="container"></div>
     </div>
-    <div class="jumbotron" data-ex="webworkers" hidden>
+
+    <div class="" data-ex="webworkers" hidden>
       <div class="container">
         <h1>Hello, world!</h1>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
