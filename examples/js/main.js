@@ -191,7 +191,7 @@ $('button#ww-unknown').on("click", function() {
 });
 
 
-
+//## Geolocation
 (function(NS) {
 	NS = NS || {};
 	var geo = {};
@@ -209,13 +209,36 @@ $('button#ww-unknown').on("click", function() {
 		console.error(error);
 		log('Geolocation error: <ul><li>code: <b>' + error.code + '</b> </li><li>message: <b>' + error.message + '</b></li></ul>', 'danger');
 	}
-	//Start the worker
+	//Ask for the location of the user.
 	geo.locate = function() {
-		//## Geolocation
+
 		navigator.geolocation.getCurrentPosition(function(position) {
 			locateSuccess(position.coords.latitude, position.coords.longitude);
 		}, locateError);
 		log('Localisation requested ... Please wait', "info");
+	};
+	geo.track = function() {
+		if(NS.geo.watchId){geo.stop();}
+		//Save the watch id in order to be able to stop it.
+		NS.geo.watchId = navigator.geolocation
+			.watchPosition(
+				function(position) {
+					locateSuccess(position.coords.latitude, position.coords.longitude);
+				},
+				locateError, {
+					enableHighAccuracy: true, //Best result as possible.
+					maximumAge: 30000, // Time during which a cached position is acceptable.
+					timeout: 27000 //time in milisecond for tracking acceptance on the response before an error.
+				});
+	};
+	geo.stop = function(){
+		if(!NS.geo.watchId){
+			log('You are not tracked ... Why so paranoid !', 'info');
+			return;
+		}
+		navigator.geolocation.clearWatch(NS.geo.watchId);
+		NS.geo.watchId = undefined;
+		log('End of watch ... Ouf!', 'info');
 	};
 
 	NS.geo = geo;
@@ -224,4 +247,11 @@ $('button#ww-unknown').on("click", function() {
 //Register button handlers.
 $('button#locate').on("click", function() {
 	Demo.geo.locate();
+});
+$('button#track').on("click", function() {
+	Demo.geo.track();
+});
+
+$('button#stop-track').on("click", function() {
+	Demo.geo.stop();
 });
