@@ -930,6 +930,103 @@ dropZone.addEventListener(<span class="hljs-string">'drop'</span>, Demo.fileapi.
             
         </li>
         
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <h2 id="promise">Promise</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">(msg, type)</span> {</span>
+		type = type || <span class="hljs-string">'info'</span>;
+		$(<span class="hljs-string">'div[data-ex="promise"] .container'</span>).append(<span class="hljs-string">"&lt;div class='alert alert-"</span> + type + <span class="hljs-string">" alert-dismissable'&gt;"</span> + msg + <span class="hljs-string">"&lt;/div&gt;"</span>);
+	}
+	<span class="hljs-keyword">var</span> prom = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(isTrue)</span>{</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p>Create a new Promise.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">new</span> Promise(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(success, reject)</span>{</span>
+			   		<span class="hljs-keyword">if</span>(isTrue){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <p>Callback which will be passed on the then in case of success.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			   			success({papa: <span class="hljs-string">"singe"</span>});
+			   		}<span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>Callback which will be passed on the then in case of error.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			   			reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"No papa singe"</span>));
+			   		}
+			   }).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sv)</span>{</span> log(<span class="hljs-built_in">JSON</span>.stringify(sv), <span class="hljs-string">"success"</span>);}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ev)</span>{</span>log(ev, <span class="hljs-string">"danger"</span>);});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>The promise is asynchronous, it happens next tick.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		log(<span class="hljs-string">"I am first...."</span>, <span class="hljs-string">"info"</span>);
+	};
+	NS.prom = prom;
+
+})(Demo);
+
+$(<span class="hljs-string">'button#launchPromise'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.prom(<span class="hljs-literal">true</span>);
+});
+
+$(<span class="hljs-string">'button#failPromise'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.prom(<span class="hljs-literal">false</span>);
+});</pre></div></div>
+            
+        </li>
+        
     </ul>
   </div>
 </body>
