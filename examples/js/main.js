@@ -2,7 +2,7 @@
 // Deal with the contene of the click on the navbar and display the page correctly.
 (function() {
 	var activeElement = document.location.hash.slice(1);
-	activeElement = activeElement ||"home";
+	activeElement = activeElement || "home";
 	var selector = "[data-ex='" + activeElement + "']";
 	document.querySelector("a" + selector).parentNode.classList.add('active');
 	document.querySelector("div" + selector).hidden = false;
@@ -34,6 +34,7 @@ Demo = {};
 
 // ## AJAX
 (function(NS) {
+	NS = NS || {};
 	var ajax = function(method, url) {
 		// Create the XHR object.
 		function createCORSRequest(method, url) {
@@ -92,6 +93,7 @@ $('button#ajax').on('click', function(event) {
 
 // ## WebSocket
 (function(NS) {
+	NS = NS || {};
 	var ws = {};
 	ws.connect = function(url) {
 		//Connect to the web socket
@@ -110,12 +112,12 @@ $('button#ajax').on('click', function(event) {
 	};
 	ws.emit = function(data) {
 		//On each click emit a message to the server which is acknowleging the result.
-		NS.socket.emit('demo-client', data, function cb(date){
+		NS.socket.emit('demo-client', data, function cb(date) {
 			//Display the response.
-			$('div[data-ex="websocket"] .container').append('<br />The server respond at: <b>'+ date+"</b>");
+			$('div[data-ex="websocket"] .container').append('<br />The server respond at: <b>' + date + "</b>");
 		});
 		//Display the emit.
-		$('div[data-ex="websocket"] .container').append('<hr />Event emit: <b>' + new Date().toJSON() +"</b>");
+		$('div[data-ex="websocket"] .container').append('<hr />Event emit: <b>' + new Date().toJSON() + "</b>");
 	};
 	NS.ws = ws;
 	return ws;
@@ -127,4 +129,59 @@ $('button#ws-click').on('click', function(event) {
 	Demo.ws.emit({
 		papa: "singe"
 	});
+});
+
+//## Webworker
+(function(NS) {
+	NS = NS || {};
+	var ww = {};
+
+	function log(msg) {
+		// Use a fragment: browser will only render/reflow once.
+		$('div[data-ex="webworkers"] .container').html(msg);
+	}
+	ww.start = function(scriptPath) {
+		if (NS.worker) {
+			ww.stop();
+		}
+		NS.worker = new Worker(scriptPath);
+		NS.worker.addEventListener('message', function(e) {
+			log(e.data);
+		}, false);
+		log('Worker is connected');
+	};
+	ww.stop = function() {
+		if (NS.worker) {
+			NS.worker.removeEventListener('message');
+			ww.send("stop", "Stop worker.");
+		}
+	};
+
+	ww.send = function(cmd, data) {
+		if (!NS.worker) {
+			log('You have to start the worker first');
+		}
+		NS.worker.postMessage({
+			cmd: cmd,
+			msg: data
+		});
+	};
+	NS.ww = ww;
+	return ww;
+})(Demo);
+
+$('button#ww-start').on("click", function() {
+	Demo.ww.start('./js/worker.js');
+});
+$('button#ww-stop').on("click", function() {
+	Demo.ww.send("stop", "Stop worker.");
+});
+$('button#ww-stop-force').on("click", function() {
+	Demo.ww.stop();
+});
+$('button#ww-nimp').on("click", function() {
+	Demo.ww.send("nimp", "This is really nimp");
+});
+$('button#ww-unknown').on("click", function() {
+	Demo.ww.send("UNKNOWN", "This should be UNKNOWN...");
 });
