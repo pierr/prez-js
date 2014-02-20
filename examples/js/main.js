@@ -2,6 +2,7 @@
 // Deal with the contene of the click on the navbar and display the page correctly.
 (function() {
 	var activeElement = document.location.hash.slice(1);
+	activeElement = activeElement ||"home";
 	var selector = "[data-ex='" + activeElement + "']";
 	document.querySelector("a" + selector).parentNode.classList.add('active');
 	document.querySelector("div" + selector).hidden = false;

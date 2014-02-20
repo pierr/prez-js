@@ -11,6 +11,27 @@
   <div id="container">
     <div id="background"></div>
     
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="main.html">
+                main.js
+              </a>
+            
+              
+              <a class="source" href="server.html">
+                server.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
     <ul class="sections">
         
           <li id="title">
@@ -34,6 +55,7 @@
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
 	<span class="hljs-keyword">var</span> activeElement = document.location.hash.slice(<span class="hljs-number">1</span>);
+	activeElement = activeElement ||<span class="hljs-string">"home"</span>;
 	<span class="hljs-keyword">var</span> selector = <span class="hljs-string">"[data-ex='"</span> + activeElement + <span class="hljs-string">"']"</span>;
 	document.querySelector(<span class="hljs-string">"a"</span> + selector).parentNode.classList.add(<span class="hljs-string">'active'</span>);
 	document.querySelector(<span class="hljs-string">"div"</span> + selector).hidden = <span class="hljs-literal">false</span>;
