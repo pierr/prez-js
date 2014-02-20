@@ -11,7 +11,7 @@ Javascript concepts and notions prezentation.
 ## Use it
 - Launch the **websocket**server  `npm run server`
 - Launch the **reveal js** server: `grunt server`
-- Generate the documentation `npm run doc`
+- Generate the **documentation** `npm run doc`
 
 ## Go to the main page
 [Begin](http://localhost:8000)
