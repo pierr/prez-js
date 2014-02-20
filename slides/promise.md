@@ -33,6 +33,7 @@ var promise = new Promise(function(resolve, reject) {
 ```
 --
 ## More
+- [Example](../examples/index.html#promise)
 - [JQuery deffered](http://api.jquery.com/category/deferred-object/) is not a promise A+
 - [q](https://github.com/kriskowal/q) does not implement promise A+
 - [SPEC](http://promises-aplus.github.io/promises-spec/)

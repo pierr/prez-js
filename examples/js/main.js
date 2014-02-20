@@ -302,3 +302,36 @@ $('button#stop-track').on("click", function() {
 var dropZone = document.getElementById('drop_zone');
 dropZone.addEventListener('dragover', Demo.fileapi.handleDragOver, false);
 dropZone.addEventListener('drop', Demo.fileapi.handle, false);
+
+//## Promise
+(function(NS) {
+	NS = NS || {};
+	function log(msg, type) {
+		type = type || 'info';
+		$('div[data-ex="promise"] .container').append("<div class='alert alert-" + type + " alert-dismissable'>" + msg + "</div>");
+	}
+	var prom = function(isTrue){
+		//Create a new Promise.
+		new Promise(function(success, reject){
+			   		if(isTrue){
+			   			//Callback which will be passed on the then in case of success.
+			   			success({papa: "singe"});
+			   		}else {
+			   			//Callback which will be passed on the then in case of error.
+			   			reject(new Error("No papa singe"));
+			   		}
+			   }).then(function(sv){ log(JSON.stringify(sv), "success");}, function(ev){log(ev, "danger");});
+		//The promise is asynchronous, it happens next tick.
+		log("I am first....", "info");
+	};
+	NS.prom = prom;
+
+})(Demo);
+
+$('button#launchPromise').on("click", function() {
+	Demo.prom(true);
+});
+
+$('button#failPromise').on("click", function() {
+	Demo.prom(false);
+});

@@ -21,6 +21,7 @@
          --><link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/vendor/bluebird.js"></script>
         <script src="http://localhost:8888/socket.io/socket.io.js"></script>
     </head>
     <body>
@@ -45,7 +46,7 @@
             <li><a data-ex="webworkers">WebWorkers</a></li>
             <li><a data-ex="geolocation">Geolocalization</a></li>
             <li><a data-ex="fileapi">File Api</a></li>
-            <li><a data-ex="offline">Offline</a></li>
+            <!--<li><a data-ex="offline">Offline</a></li>-->
             <li><a data-ex="promise">Promise</a></li>
           </ul>
             <form class="navbar-form navbar-right" role="form">
@@ -101,6 +102,15 @@
         <hr />
       <div class="container">
           <output></output>
+      </div>
+    </div>
+
+    <div class="jumbotron" data-ex="promise" hidden>
+        <h1>Promise</h1>
+        <button id="launchPromise" class="btn btn-success">Launch</button>
+        <button id="failPromise" class="btn btn-danger">Abort</button>
+        <hr />
+      <div class="container">
       </div>
     </div>
 

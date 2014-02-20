@@ -72,12 +72,35 @@ var inputElement = document.getElementById("input");
 inputElement.addEventListener("change", handleFiles, false);
 function handleFiles() {
   var fileList = this.files;
+  if(this.files.length === 0){return;}
+  var file = files[0];
+  console.log(file.name, file.type, file.lastModifiedDate);
 }
 ```
 - [MDN](https://developer.mozilla.org/fr/docs/Using_files_from_web_applications)
 - [Example](../examples/index.html#fileapi)
 --
-# Offline (1/3)
-- application cache
+# Offline (1/2)
+- Application cache
+- Manifest file
+```
+CACHE MANIFEST
+# 2012-02-21 v1.0.0
+/theme.css
+/logo.gif
+/main.js
+```
+--
+# Offline (2/2)
 - DOM storage
-- 
+- Local Storage, limit, indexDB
+```:javascript
+//Save the item.
+localStorage.setItem(
+  'papa', 
+  JSON.stringify({singe: 'blue'})
+);
+//Get the item
+JSON.parse(localStorage.getItem('papa')); 
+//Object {singe: "blue"}
+```
