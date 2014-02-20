@@ -52,3 +52,7 @@ var watchID = navigator.geolocation
 ```
 - You can watch the user position, a callback is called each time the position change.
 - The watch can be cancelled with `navigator.geolocation.clearWatch(watchID);`
+--
+# File API
+- [MDN](https://developer.mozilla.org/fr/docs/Using_files_from_web_applications)
+- [Example](../examples/index.html#fileApi)
