@@ -4,7 +4,7 @@
 - **Background** scripts inside the application
 - Run in a **isaolated thread**
 
-```:javascript
+```:JavaScript
 //Create the Worker from a separate file
 var worker = new Worker('doWork.js');
 //Listen to the ww messages
@@ -31,7 +31,7 @@ worker.postMessage('Worker, it's time to run.);
 - [Example](../examples/index.html#geolocation)
 --
 ## Geolocation current position (2/3)
-```:javascript
+```:JavaScript
 navigator.geolocation.getCurrentPosition(function(position) {
   do_something(position.coords.latitude, position.coords.longitude);
 });
@@ -39,7 +39,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 - You can get the **current** position
 --
 ## Geolocation  watch position(3/3)
-```:javascript
+```:JavaScript
 var watchID = navigator.geolocation
 					   .watchPosition(
 						 geo_success, 

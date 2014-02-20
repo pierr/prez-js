@@ -1,7 +1,7 @@
 # Communication
 --
 ## XMLHttpRequest
-```:javascript
+```:JavaScript
 var req = new XMLHttpRequest();
 req.open('GET', 'http://www.mozilla.org/', true);
 req.onreadystatechange = function (aEvt) {
@@ -26,7 +26,7 @@ req.send(null);
 - [socket.io](http://socket.io/)
 --
 ## WebSockets  server  (2/3)
-```:javascript
+```:JavaScript
 //Server
 var io = require('socket.io').listen(80);
 io.sockets.on('connection', function (socket) {
@@ -38,7 +38,7 @@ io.sockets.on('connection', function (socket) {
 ```
 --
 ## WebSockets  client (3/3)
-```:javascript
+```:JavaScript
 //Client
  var socket = io.connect('http://localhost');
   socket.on('news', function (data) {
