@@ -71,13 +71,13 @@ Demo = {};
 			xhr.onload = function() {
 				var text = xhr.responseText;
 				var title = getTitle(text);
-				$('div[data-ex="ajax"] .container').html("<div class='alert alert-success alert-dismissable'>"+ title+ "</div>");
+				$('div[data-ex="ajax"] .container').html("<div class='alert alert-success alert-dismissable'>" + title + "</div>");
 			};
 
 
 
 			xhr.onerror = function() {
-				$('div[data-ex="ajax"] .container').html("<div class='alert alert-danger alert-dismissable'>"+ 'Woops, there was an error making the request.'+ "</div>");
+				$('div[data-ex="ajax"] .container').html("<div class='alert alert-danger alert-dismissable'>" + 'Woops, there was an error making the request.' + "</div>");
 			};
 
 			xhr.send();
@@ -139,7 +139,7 @@ $('button#ws-click').on('click', function(event) {
 	var ww = {};
 	//This will display the message into the container.
 	function log(msg) {
-		$('div[data-ex="webworkers"] .container').html("<div class='alert alert-info alert-dismissable'>"+ msg+ "</div>");
+		$('div[data-ex="webworkers"] .container').html("<div class='alert alert-info alert-dismissable'>" + msg + "</div>");
 	}
 	//Start the worker
 	ww.start = function(scriptPath) {
@@ -188,4 +188,40 @@ $('button#ww-nimp').on("click", function() {
 });
 $('button#ww-unknown').on("click", function() {
 	Demo.ww.send("UNKNOWN", "This should be UNKNOWN...");
+});
+
+
+
+(function(NS) {
+	NS = NS || {};
+	var geo = {};
+	//This will display the message into the container.
+	function log(msg, type) {
+		type = type || 'info';
+		$('div[data-ex="geolocation"] .container').html("<div class='alert alert-" + type + " alert-dismissable'>" + msg + "</div>");
+	}
+
+	function locateSuccess(lat, long) {
+		log('Geolocation success: <ul><li>lat: <b>' + lat + '</b> </li><li>long: <b>' + long + '</b></li></ul>', "success");
+	}
+
+	function locateError(error) {
+		console.error(error);
+		log('Geolocation error: <ul><li>code: <b>' + error.code + '</b> </li><li>message: <b>' + error.message + '</b></li></ul>', 'danger');
+	}
+	//Start the worker
+	geo.locate = function() {
+		//## Geolocation
+		navigator.geolocation.getCurrentPosition(function(position) {
+			locateSuccess(position.coords.latitude, position.coords.longitude);
+		}, locateError);
+		log('Localisation requested ... Please wait', "info");
+	};
+
+	NS.geo = geo;
+	return geo;
+})(Demo);
+//Register button handlers.
+$('button#locate').on("click", function() {
+	Demo.geo.locate();
 });
