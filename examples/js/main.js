@@ -218,7 +218,9 @@ $('button#ww-unknown').on("click", function() {
 		log('Localisation requested ... Please wait', "info");
 	};
 	geo.track = function() {
-		if(NS.geo.watchId){geo.stop();}
+		if (NS.geo.watchId) {
+			geo.stop();
+		}
 		//Save the watch id in order to be able to stop it.
 		NS.geo.watchId = navigator.geolocation
 			.watchPosition(
@@ -231,8 +233,8 @@ $('button#ww-unknown').on("click", function() {
 					timeout: 27000 //time in milisecond for tracking acceptance on the response before an error.
 				});
 	};
-	geo.stop = function(){
-		if(!NS.geo.watchId){
+	geo.stop = function() {
+		if (!NS.geo.watchId) {
 			log('You are not tracked ... Why so paranoid !', 'info');
 			return;
 		}
@@ -255,3 +257,48 @@ $('button#track').on("click", function() {
 $('button#stop-track').on("click", function() {
 	Demo.geo.stop();
 });
+
+
+//## File API
+(function(NS) {
+	NS = NS || {};
+	var fileapi = {};
+	//This will display the message into the container.
+	function log(msg, type) {
+		type = type || 'info';
+		$('div[data-ex="fileapi"] .container output').append("<div class='alert alert-" + type + " alert-dismissable'>" + msg + "</div>");
+	}
+	//Handle the drop and treat the file.
+	fileapi.handle = function handleFileSelect(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		var files = evt.dataTransfer.files; // FileList object.
+		// files is a FileList of File objects. List some properties.
+		var output = [];
+		//Loopind through each file in the data transfer
+		for (var i = 0, f; f = files[i]; i++) {
+			//Display all the files properties.
+			output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+				f.size, ' bytes, last modified: ',
+				f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+				'</li>');
+		}
+		log('<ul>' + output.join('') + '</ul>', "info");
+	};
+	//Drag an drop stop event for the end.
+	fileapi.handleDragOver = function handleDragOver(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	};
+
+
+
+	NS.fileapi = fileapi;
+	return fileapi;
+})(Demo);
+
+// Setup the dnd listeners.
+var dropZone = document.getElementById('drop_zone');
+dropZone.addEventListener('dragover', Demo.fileapi.handleDragOver, false);
+dropZone.addEventListener('drop', Demo.fileapi.handle, false);

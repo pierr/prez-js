@@ -55,10 +55,27 @@ var watchID = navigator.geolocation
 - You can watch the user position, a callback is called each time the position change.
 - The watch can be cancelled with `navigator.geolocation.clearWatch(watchID);`
 --
-# File API
-- [MDN](https://developer.mozilla.org/fr/docs/Using_files_from_web_applications)
-- [Example](../examples/index.html#fileApi)
 
+# File API (1/2)
+
+```:html
+  <input type="file" id="input" multiple/>
+```
+
+- Add a multiple options
+- File can be accessed with JavaScript
+
+--
+# File API (2/2)
+````:JavaScript
+var inputElement = document.getElementById("input");
+inputElement.addEventListener("change", handleFiles, false);
+function handleFiles() {
+  var fileList = this.files;
+}
+```
+- [MDN](https://developer.mozilla.org/fr/docs/Using_files_from_web_applications)
+- [Example](../examples/index.html#fileapi)
 --
 # Offline (1/3)
 - application cache

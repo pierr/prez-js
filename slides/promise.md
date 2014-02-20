@@ -23,13 +23,13 @@
 ## The code
 ```:javascript
 var promise = new Promise(function(resolve, reject) {
-  //Do something maybe asynchronous or not
-  var isOk = treatement();
-  if (isOk) {
-    resolve("It works...");
-  } else {
-    reject(Error("It does not work!"));
-  }
+	  //Do something maybe asynchronous or not
+	  var isOk = treatement();
+	  if (isOk) {
+	    resolve("It works...");
+	  } else {
+	    reject(Error("It does not work!"))
+}).then(console.log, console.error);
 ```
 --
 ## More

@@ -327,13 +327,13 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
             <div class="content"><div class='highlight'><pre>			xhr.onload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
 				<span class="hljs-keyword">var</span> text = xhr.responseText;
 				<span class="hljs-keyword">var</span> title = getTitle(text);
-				$(<span class="hljs-string">'div[data-ex="ajax"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-success alert-dismissable'&gt;"</span>+ title+ <span class="hljs-string">"&lt;/div&gt;"</span>);
+				$(<span class="hljs-string">'div[data-ex="ajax"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-success alert-dismissable'&gt;"</span> + title + <span class="hljs-string">"&lt;/div&gt;"</span>);
 			};
 
 
 
 			xhr.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-				$(<span class="hljs-string">'div[data-ex="ajax"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-danger alert-dismissable'&gt;"</span>+ <span class="hljs-string">'Woops, there was an error making the request.'</span>+ <span class="hljs-string">"&lt;/div&gt;"</span>);
+				$(<span class="hljs-string">'div[data-ex="ajax"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-danger alert-dismissable'&gt;"</span> + <span class="hljs-string">'Woops, there was an error making the request.'</span> + <span class="hljs-string">"&lt;/div&gt;"</span>);
 			};
 
 			xhr.send();
@@ -535,7 +535,7 @@ $(<span class="hljs-string">'button#ws-click'</span>).on(<span class="hljs-strin
             </div>
             
             <div class="content"><div class='highlight'><pre>	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">(msg)</span> {</span>
-		$(<span class="hljs-string">'div[data-ex="webworkers"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-info alert-dismissable'&gt;"</span>+ msg+ <span class="hljs-string">"&lt;/div&gt;"</span>);
+		$(<span class="hljs-string">'div[data-ex="webworkers"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-info alert-dismissable'&gt;"</span> + msg + <span class="hljs-string">"&lt;/div&gt;"</span>);
 	}</pre></div></div>
             
         </li>
@@ -650,6 +650,283 @@ $(<span class="hljs-string">'button#ww-nimp'</span>).on(<span class="hljs-string
 $(<span class="hljs-string">'button#ww-unknown'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
 	Demo.ww.send(<span class="hljs-string">"UNKNOWN"</span>, <span class="hljs-string">"This should be UNKNOWN..."</span>);
 });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <h2 id="geolocation">Geolocation</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
+	<span class="hljs-keyword">var</span> geo = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>This will display the message into the container.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">(msg, type)</span> {</span>
+		type = type || <span class="hljs-string">'info'</span>;
+		$(<span class="hljs-string">'div[data-ex="geolocation"] .container'</span>).html(<span class="hljs-string">"&lt;div class='alert alert-"</span> + type + <span class="hljs-string">" alert-dismissable'&gt;"</span> + msg + <span class="hljs-string">"&lt;/div&gt;"</span>);
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">locateSuccess</span><span class="hljs-params">(lat, long)</span> {</span>
+		log(<span class="hljs-string">'Geolocation success: &lt;ul&gt;&lt;li&gt;lat: &lt;b&gt;'</span> + lat + <span class="hljs-string">'&lt;/b&gt; &lt;/li&gt;&lt;li&gt;long: &lt;b&gt;'</span> + long + <span class="hljs-string">'&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;'</span>, <span class="hljs-string">"success"</span>);
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">locateError</span><span class="hljs-params">(error)</span> {</span>
+		console.error(error);
+		log(<span class="hljs-string">'Geolocation error: &lt;ul&gt;&lt;li&gt;code: &lt;b&gt;'</span> + error.code + <span class="hljs-string">'&lt;/b&gt; &lt;/li&gt;&lt;li&gt;message: &lt;b&gt;'</span> + error.message + <span class="hljs-string">'&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;'</span>, <span class="hljs-string">'danger'</span>);
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Ask for the location of the user.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	geo.locate = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+
+		navigator.geolocation.getCurrentPosition(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(position)</span> {</span>
+			locateSuccess(position.coords.latitude, position.coords.longitude);
+		}, locateError);
+		log(<span class="hljs-string">'Localisation requested ... Please wait'</span>, <span class="hljs-string">"info"</span>);
+	};
+	geo.track = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">if</span> (NS.geo.watchId) {
+			geo.stop();
+		}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Save the watch id in order to be able to stop it.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		NS.geo.watchId = navigator.geolocation
+			.watchPosition(
+				<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(position)</span> {</span>
+					locateSuccess(position.coords.latitude, position.coords.longitude);
+				},
+				locateError, {
+					enableHighAccuracy: <span class="hljs-literal">true</span>, <span class="hljs-comment">//Best result as possible.</span>
+					maximumAge: <span class="hljs-number">30000</span>, <span class="hljs-comment">// Time during which a cached position is acceptable.</span>
+					timeout: <span class="hljs-number">27000</span> <span class="hljs-comment">//time in milisecond for tracking acceptance on the response before an error.</span>
+				});
+	};
+	geo.stop = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">if</span> (!NS.geo.watchId) {
+			log(<span class="hljs-string">'You are not tracked ... Why so paranoid !'</span>, <span class="hljs-string">'info'</span>);
+			<span class="hljs-keyword">return</span>;
+		}
+		navigator.geolocation.clearWatch(NS.geo.watchId);
+		NS.geo.watchId = <span class="hljs-literal">undefined</span>;
+		log(<span class="hljs-string">'End of watch ... Ouf!'</span>, <span class="hljs-string">'info'</span>);
+	};
+
+	NS.geo = geo;
+	<span class="hljs-keyword">return</span> geo;
+})(Demo);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Register button handlers.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$(<span class="hljs-string">'button#locate'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.geo.locate();
+});
+$(<span class="hljs-string">'button#track'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.geo.track();
+});
+
+$(<span class="hljs-string">'button#stop-track'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.geo.stop();
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <h2 id="file-api">File API</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
+	<span class="hljs-keyword">var</span> fileapi = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>This will display the message into the container.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">(msg, type)</span> {</span>
+		type = type || <span class="hljs-string">'info'</span>;
+		$(<span class="hljs-string">'div[data-ex="fileapi"] .container output'</span>).append(<span class="hljs-string">"&lt;div class='alert alert-"</span> + type + <span class="hljs-string">" alert-dismissable'&gt;"</span> + msg + <span class="hljs-string">"&lt;/div&gt;"</span>);
+	}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Handle the drop and treat the file.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	fileapi.handle = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleFileSelect</span><span class="hljs-params">(evt)</span> {</span>
+		evt.stopPropagation();
+		evt.preventDefault();
+		<span class="hljs-keyword">var</span> files = evt.dataTransfer.files; <span class="hljs-comment">// FileList object.</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>files is a FileList of File objects. List some properties.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">var</span> output = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>Loopind through each file in the data transfer</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, f; f = files[i]; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <p>Display all the files properties.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			output.push(<span class="hljs-string">'&lt;li&gt;&lt;strong&gt;'</span>, <span class="hljs-built_in">escape</span>(f.name), <span class="hljs-string">'&lt;/strong&gt; ('</span>, f.type || <span class="hljs-string">'n/a'</span>, <span class="hljs-string">') - '</span>,
+				f.size, <span class="hljs-string">' bytes, last modified: '</span>,
+				f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : <span class="hljs-string">'n/a'</span>,
+				<span class="hljs-string">'&lt;/li&gt;'</span>);
+		}
+		log(<span class="hljs-string">'&lt;ul&gt;'</span> + output.join(<span class="hljs-string">''</span>) + <span class="hljs-string">'&lt;/ul&gt;'</span>, <span class="hljs-string">"info"</span>);
+	};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>Drag an drop stop event for the end.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	fileapi.handleDragOver = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleDragOver</span><span class="hljs-params">(evt)</span> {</span>
+		evt.stopPropagation();
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = <span class="hljs-string">'copy'</span>; <span class="hljs-comment">// Explicitly show this is a copy.</span>
+	};
+
+
+
+	NS.fileapi = fileapi;
+	<span class="hljs-keyword">return</span> fileapi;
+})(Demo);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>Setup the dnd listeners.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> dropZone = document.getElementById(<span class="hljs-string">'drop_zone'</span>);
+dropZone.addEventListener(<span class="hljs-string">'dragover'</span>, Demo.fileapi.handleDragOver, <span class="hljs-literal">false</span>);
+dropZone.addEventListener(<span class="hljs-string">'drop'</span>, Demo.fileapi.handle, <span class="hljs-literal">false</span>);</pre></div></div>
             
         </li>
         
