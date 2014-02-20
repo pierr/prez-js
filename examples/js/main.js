@@ -71,11 +71,13 @@ Demo = {};
 			xhr.onload = function() {
 				var text = xhr.responseText;
 				var title = getTitle(text);
-				$('div[data-ex="ajax"] .container').html(title);
+				$('div[data-ex="ajax"] .container').html("<div class='alert alert-success alert-dismissable'>"+ title+ "</div>");
 			};
 
+
+
 			xhr.onerror = function() {
-				$('div[data-ex="ajax"] .container').html('Woops, there was an error making the request.');
+				$('div[data-ex="ajax"] .container').html("<div class='alert alert-danger alert-dismissable'>"+ 'Woops, there was an error making the request.'+ "</div>");
 			};
 
 			xhr.send();
@@ -106,7 +108,7 @@ $('button#ajax').on('click', function(event) {
 				my: 'ws-connect'
 			});
 			//Display the connection status.
-			$('div[data-ex="websocket"] .container').html('Connected');
+			$('div[data-ex="websocket"] .container').html('<div class="alert alert-success alert-dismissable">Connected</div>');
 		});
 
 	};
@@ -114,10 +116,10 @@ $('button#ajax').on('click', function(event) {
 		//On each click emit a message to the server which is acknowleging the result.
 		NS.socket.emit('demo-client', data, function cb(date) {
 			//Display the response.
-			$('div[data-ex="websocket"] .container').append('<br />The server respond at: <b>' + date + "</b>");
+			$('div[data-ex="websocket"] .container').append('<div class="alert alert-success alert-dismissable">The server respond at: <b>' + date + "</b></div>");
 		});
 		//Display the emit.
-		$('div[data-ex="websocket"] .container').append('<hr />Event emit: <b>' + new Date().toJSON() + "</b>");
+		$('div[data-ex="websocket"] .container').append('<div class="alert alert-info alert-dismissable">Event emit: <b>' + new Date().toJSON() + "</b> </div>");
 	};
 	NS.ws = ws;
 	return ws;
@@ -135,11 +137,11 @@ $('button#ws-click').on('click', function(event) {
 (function(NS) {
 	NS = NS || {};
 	var ww = {};
-
+	//This will display the message into the container.
 	function log(msg) {
-		// Use a fragment: browser will only render/reflow once.
-		$('div[data-ex="webworkers"] .container').html(msg);
+		$('div[data-ex="webworkers"] .container').html("<div class='alert alert-info alert-dismissable'>"+ msg+ "</div>");
 	}
+	//Start the worker
 	ww.start = function(scriptPath) {
 		if (NS.worker) {
 			ww.stop();
@@ -150,17 +152,19 @@ $('button#ws-click').on('click', function(event) {
 		}, false);
 		log('Worker is connected');
 	};
+	//Stop the web worker.
 	ww.stop = function() {
 		if (NS.worker) {
 			NS.worker.removeEventListener('message');
 			ww.send("stop", "Stop worker.");
 		}
 	};
-
+	//Send a message to the web worker, with the followind contract: `{cmd: "commandName", data: {...}}`
 	ww.send = function(cmd, data) {
 		if (!NS.worker) {
 			log('You have to start the worker first');
 		}
+		//Use the post message interface.
 		NS.worker.postMessage({
 			cmd: cmd,
 			msg: data
@@ -169,7 +173,7 @@ $('button#ws-click').on('click', function(event) {
 	NS.ww = ww;
 	return ww;
 })(Demo);
-
+//Register button handlers.
 $('button#ww-start').on("click", function() {
 	Demo.ww.start('./js/worker.js');
 });

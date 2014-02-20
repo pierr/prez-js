@@ -19,7 +19,9 @@ worker.postMessage('Worker, it's time to run.);
 ## What can they do
 - __Access__ **navigator**, **location**, **xhr**, **appcache**, **other worker**, **external scripts** with `importScripts()`
 - __No Access__ **DOM**, **window**, **document**, **parent**
-- [Example](../examples/index.html#webworker)
+- [Example](../examples/index.html#webworkers
+)
+
 - [html5rocks](http://www.html5rocks.com/en/tutorials/workers/basics/)
 
 --
