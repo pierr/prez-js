@@ -24,6 +24,11 @@
               </a>
             
               
+              <a class="source" href="worker.html">
+                worker.js
+              </a>
+            
+              
               <a class="source" href="server.html">
                 server.js
               </a>
@@ -55,7 +60,7 @@
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
 	<span class="hljs-keyword">var</span> activeElement = document.location.hash.slice(<span class="hljs-number">1</span>);
-	activeElement = activeElement ||<span class="hljs-string">"home"</span>;
+	activeElement = activeElement || <span class="hljs-string">"home"</span>;
 	<span class="hljs-keyword">var</span> selector = <span class="hljs-string">"[data-ex='"</span> + activeElement + <span class="hljs-string">"']"</span>;
 	document.querySelector(<span class="hljs-string">"a"</span> + selector).parentNode.classList.add(<span class="hljs-string">'active'</span>);
 	document.querySelector(<span class="hljs-string">"div"</span> + selector).hidden = <span class="hljs-literal">false</span>;
@@ -184,6 +189,7 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
             </div>
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
 	<span class="hljs-keyword">var</span> ajax = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(method, url)</span> {</span></pre></div></div>
             
         </li>
@@ -367,6 +373,7 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
             </div>
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
 	<span class="hljs-keyword">var</span> ws = {};
 	ws.connect = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url)</span> {</span></pre></div></div>
             
@@ -450,7 +457,7 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		NS.socket.emit(<span class="hljs-string">'demo-client'</span>, data, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cb</span><span class="hljs-params">(date)</span>{</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>		NS.socket.emit(<span class="hljs-string">'demo-client'</span>, data, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cb</span><span class="hljs-params">(date)</span> {</span></pre></div></div>
             
         </li>
         
@@ -465,7 +472,7 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			$(<span class="hljs-string">'div[data-ex="websocket"] .container'</span>).append(<span class="hljs-string">'&lt;br /&gt;The server respond at: &lt;b&gt;'</span>+ date+<span class="hljs-string">"&lt;/b&gt;"</span>);
+            <div class="content"><div class='highlight'><pre>			$(<span class="hljs-string">'div[data-ex="websocket"] .container'</span>).append(<span class="hljs-string">'&lt;br /&gt;The server respond at: &lt;b&gt;'</span> + date + <span class="hljs-string">"&lt;/b&gt;"</span>);
 		});</pre></div></div>
             
         </li>
@@ -481,7 +488,7 @@ $(<span class="hljs-string">'.navbar a[data-ex]'</span>).on(<span class="hljs-st
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		$(<span class="hljs-string">'div[data-ex="websocket"] .container'</span>).append(<span class="hljs-string">'&lt;hr /&gt;Event emit: &lt;b&gt;'</span> + <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toJSON() +<span class="hljs-string">"&lt;/b&gt;"</span>);
+            <div class="content"><div class='highlight'><pre>		$(<span class="hljs-string">'div[data-ex="websocket"] .container'</span>).append(<span class="hljs-string">'&lt;hr /&gt;Event emit: &lt;b&gt;'</span> + <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toJSON() + <span class="hljs-string">"&lt;/b&gt;"</span>);
 	};
 	NS.ws = ws;
 	<span class="hljs-keyword">return</span> ws;
@@ -493,6 +500,86 @@ $(<span class="hljs-string">'button#ws-click'</span>).on(<span class="hljs-strin
 	Demo.ws.emit({
 		papa: <span class="hljs-string">"singe"</span>
 	});
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h2 id="webworker">Webworker</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(NS)</span> {</span>
+	NS = NS || {};
+	<span class="hljs-keyword">var</span> ww = {};
+
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">(msg)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Use a fragment: browser will only render/reflow once.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		$(<span class="hljs-string">'div[data-ex="webworkers"] .container'</span>).html(msg);
+	}
+	ww.start = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(scriptPath)</span> {</span>
+		<span class="hljs-keyword">if</span> (NS.worker) {
+			ww.stop();
+		}
+		NS.worker = <span class="hljs-keyword">new</span> Worker(scriptPath);
+		NS.worker.addEventListener(<span class="hljs-string">'message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+			log(e.data);
+		}, <span class="hljs-literal">false</span>);
+		log(<span class="hljs-string">'Worker is connected'</span>);
+	};
+	ww.stop = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">if</span> (NS.worker) {
+			NS.worker.removeEventListener(<span class="hljs-string">'message'</span>);
+			ww.send(<span class="hljs-string">"stop"</span>, <span class="hljs-string">"Stop worker."</span>);
+		}
+	};
+
+	ww.send = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cmd, data)</span> {</span>
+		<span class="hljs-keyword">if</span> (!NS.worker) {
+			log(<span class="hljs-string">'You have to start the worker first'</span>);
+		}
+		NS.worker.postMessage({
+			cmd: cmd,
+			msg: data
+		});
+	};
+	NS.ww = ww;
+	<span class="hljs-keyword">return</span> ww;
+})(Demo);
+
+$(<span class="hljs-string">'button#ww-start'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.ww.start(<span class="hljs-string">'./js/worker.js'</span>);
+});
+$(<span class="hljs-string">'button#ww-stop'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.ww.send(<span class="hljs-string">"stop"</span>, <span class="hljs-string">"Stop worker."</span>);
+});
+$(<span class="hljs-string">'button#ww-stop-force'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.ww.stop();
+});
+$(<span class="hljs-string">'button#ww-nimp'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.ww.send(<span class="hljs-string">"nimp"</span>, <span class="hljs-string">"This is really nimp"</span>);
+});
+$(<span class="hljs-string">'button#ww-unknown'</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+	Demo.ww.send(<span class="hljs-string">"UNKNOWN"</span>, <span class="hljs-string">"This should be UNKNOWN..."</span>);
 });</pre></div></div>
             
         </li>

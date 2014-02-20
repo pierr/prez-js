@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>server.js</title>
+  <title>worker.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -41,7 +41,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>server.js</h1>
+                  <h1>worker.js</h1>
               </div>
           </li>
         
@@ -53,10 +53,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <h2 id="this-file-contains-a-web-worker-it-is-in-an-external-file-by-default-">This file contains a web worker. It is in an external file by default.</h2>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> io = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>).listen(<span class="hljs-number">8888</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>self.addEventListener(<span class="hljs-string">'message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+	<span class="hljs-keyword">var</span> data = e.data;</pre></div></div>
             
         </li>
         
@@ -67,11 +69,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register the connection.</p>
+              <p>Switch on  the message we receive.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>io.sockets.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(socket)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-keyword">switch</span> (data.cmd) {</pre></div></div>
             
         </li>
         
@@ -82,13 +84,16 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Emit en event in order to say that the connection is active to the clients.</p>
+              <p>The worket begin to work.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	socket.emit(<span class="hljs-string">'news'</span>, {
-		hello: <span class="hljs-string">'world'</span>
-	});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">case</span> <span class="hljs-string">'start'</span>:
+			self.postMessage(<span class="hljs-string">'WORKER STARTED: '</span> + data.msg);
+			<span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">case</span> <span class="hljs-string">'nimp'</span>:
+			self.postMessage(<span class="hljs-string">'WORKER NIMP: '</span> + data.msg);
+			<span class="hljs-keyword">break</span>;</pre></div></div>
             
         </li>
         
@@ -99,14 +104,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Listen to the events from tje client and acknolgge it.</p>
+              <p>Stop the worker.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	socket.on(<span class="hljs-string">'demo-client'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data, fn)</span> {</span>
-		<span class="hljs-keyword">var</span> jsonDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toJSON();
-		console.log(<span class="hljs-string">"The client called me at "</span> + jsonDate, data);
-		<span class="hljs-keyword">if</span> (fn !== <span class="hljs-literal">undefined</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">case</span> <span class="hljs-string">'stop'</span>:
+			self.postMessage(<span class="hljs-string">'WORKER STOPPED: '</span> + data.msg +
+				<span class="hljs-string">'. (buttons will no longer work)'</span>);
+			self.close(); <span class="hljs-comment">// Terminates the worker.</span>
+			<span class="hljs-keyword">break</span>;</pre></div></div>
             
         </li>
         
@@ -117,14 +123,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Callback the emitter with any data you want to pass.</p>
+              <p>I cannot treat your demand.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			fn(jsonDate);
-		}
-	});
-});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">default</span>:
+			self.postMessage(<span class="hljs-string">'Unknown command: '</span> + data.msg);
+	}
+}, <span class="hljs-literal">false</span>);</pre></div></div>
             
         </li>
         
