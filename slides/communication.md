@@ -1,7 +1,7 @@
 # Communication
 --
 ## XMLHttpRequest
-```:JavaScript
+```:javascript
 var req = new XMLHttpRequest();
 req.open('GET', 'http://www.mozilla.org/', true);
 req.onreadystatechange = function (aEvt) {
@@ -26,20 +26,21 @@ req.send(null);
 - [socket.io](http://socket.io/)
 --
 ## WebSockets  server  (2/3)
-```:JavaScript
-//Server
+```:javascript
 var io = require('socket.io').listen(80);
 io.sockets.on('connection', function (socket) {
+
   socket.emit('news', { hello: 'world' });
+  
   socket.on('my other event', function (data) {
     console.log(data);
   });
+
 });
 ```
 --
 ## WebSockets  client (3/3)
-```:JavaScript
-//Client
+```:javascript
  var socket = io.connect('http://localhost');
   socket.on('news', function (data) {
     console.log(data);

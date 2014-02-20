@@ -4,7 +4,7 @@
 - **Background** scripts inside the application
 - Run in a **isaolated thread**
 
-```:JavaScript
+```:javascript
 //Create the Worker from a separate file
 var worker = new Worker('doWork.js');
 //Listen to the ww messages
@@ -33,7 +33,7 @@ worker.postMessage('Worker, it's time to run.);
 - [Example](../examples/index.html#geolocation)
 --
 ## Geolocation current position (2/3)
-```:JavaScript
+```:javascript
 navigator.geolocation.getCurrentPosition(function(position) {
   do_something(position.coords.latitude, position.coords.longitude);
 });
@@ -41,7 +41,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 - You can get the **current** position
 --
 ## Geolocation  watch position(3/3)
-```:JavaScript
+```:javascript
 var watchID = navigator.geolocation
 					   .watchPosition(
 						 geo_success, 
@@ -58,3 +58,9 @@ var watchID = navigator.geolocation
 # File API
 - [MDN](https://developer.mozilla.org/fr/docs/Using_files_from_web_applications)
 - [Example](../examples/index.html#fileApi)
+
+--
+# Offline (1/3)
+- application cache
+- DOM storage
+- 
