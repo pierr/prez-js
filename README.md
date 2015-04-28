@@ -14,4 +14,6 @@ Javascript concepts and notions prezentation.
 - Generate the **documentation** `npm run doc`
 
 ## Go to the main page
+
 [Begin](http://localhost:8000)
+
